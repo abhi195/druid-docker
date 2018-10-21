@@ -2,7 +2,7 @@
 
 ## Docker for setting up single machine Druid Cluster
 
-[Install Docker](https://docs.docker.com/install/)
+To install refer : [Install Docker](https://docs.docker.com/install/)
 
 Download and launch the docker image
 
