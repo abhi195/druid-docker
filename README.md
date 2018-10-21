@@ -34,9 +34,9 @@ docker build -t druid-cluster druid-docker
 
 Supervisor logs are configured at `/var/log/druid/`
 
-Druid's are at its default path.
+Druid's logs are at its default path.
 
-For seeing the logs you need to login into the container:
+Following steps are for logging into the container, then you can see the log files :
 - List running containers using `docker ps`
 - Note container-id of container running druid-cluster
 - Execute `docker exec -it container-id /bin/bash`
@@ -44,13 +44,13 @@ For seeing the logs you need to login into the container:
 
 ## Troubleshooting
 
-Latest image `abhi195/druid-cluster` is tested on OSX with 4GB of RAM and 2CPSs assigned to Docker.
+Latest image `abhi195/druid-cluster` is tested on OSX with 4GB of RAM and 2CPUs assigned to Docker.
 
 ### XX:MaxDirectMemorySize error when using OSX
 
-If you are running docker on OSX, you might get XX:MaxDirectMemorySize error because on OSX the Docker environment runs within [HyperKit](https://github.com/docker/hyperkit) hypervisor.
+If you are running docker on OSX you might get XX:MaxDirectMemorySize error because on OSX the Docker environment runs within [HyperKit](https://github.com/docker/hyperkit) hypervisor.
 
-Driud configurations inside `conf` folder already includes some changes in properties to fix this error.
+Driud configurations inside `conf` folder of this repository already includes some changes in properties to fix this error.
 
 To fix this you can take following steps:
 - Tweak memory/cache/processing/threads related properties 
