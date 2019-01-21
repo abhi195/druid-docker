@@ -1,6 +1,6 @@
 FROM ubuntu:14.04.5
 
-# Set version and github repo which you want to build from
+# Set druid and zookeeper version which you want to build from
 ENV DRUID_VERSION 0.12.3
 ENV ZOOKEEPER_VERSION 3.4.6
 
@@ -47,6 +47,9 @@ RUN wget -q -O - https://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_
 
 WORKDIR /home/users/druid/druid-$DRUID_VERSION
 
+# Make directory for scripts
+RUN mkdir scripts
+
 # Replacing properties with custom properties
 ADD conf/common.runtime.properties conf/druid/_common/common.runtime.properties
 ADD conf/broker.runtime.properties conf/druid/broker/runtime.properties
@@ -54,9 +57,11 @@ ADD conf/coordinator.runtime.properties conf/druid/coordinator/runtime.propertie
 ADD conf/historical.runtime.properties conf/druid/historical/runtime.properties
 ADD conf/middleManager.runtime.properties conf/druid/middleManager/runtime.properties
 ADD conf/overlord.runtime.properties conf/druid/overlord/runtime.properties
+ADD scripts/load_datasources.sh scripts/load_datasources.sh
 
 RUN bin/init
 RUN chown -R druid:druid /home/users/druid
+RUN chmod +x /home/users/druid/druid-$DRUID_VERSION/scripts/load_datasources.sh
 
 # Setup supervisord
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
